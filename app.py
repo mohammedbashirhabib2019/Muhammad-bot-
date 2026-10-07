@@ -11,7 +11,7 @@ def get_ai_answer(q):
         url = "https://api.groq.com/openai/v1/chat/completions"
         headers = {"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"}
         data = {
-            "model": "llama-3.1-8b-instant",
+            "model": "llama-3.3-70b-versatile",
             "messages": [
                 {"role": "system", "content": "Kai ne MuhammadBot, mataimaki mai hankali. Kana magana da Hausa da English."},
                 {"role": "user", "content": q}
