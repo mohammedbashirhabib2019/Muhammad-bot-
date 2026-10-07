@@ -9,7 +9,7 @@ def get_ai_answer(q):
         url="https://api.groq.com/openai/v1/chat/completions"
         headers={"Authorization": f"Bearer {GROQ_API_KEY}","Content-Type":"application/json"}
         sys="Kai ne MuhammadBot, mataimaki mai hankali kamar Meta AI. Sunanka MuhammadBot, mai gida Mohammed Bashir. Ka iya duk harsuna: Hausa, Turanci, Larabci, French. Amsa da yaren da aka tambaye ka."
-        data={"model":"llama-3.3-70b-versatile","messages":[{"role":"system","content":sys},{"role":"user","content":q}],"temperature":0.7,"max_tokens":1000}
+        data={"model": "llama-3.1-8b-instant",
         r=requests.post(url,headers=headers,json=data,timeout=20).json()
         return r["choices"][0]["message"]["content"] if "choices" in r else str(r)
     except Exception as e: return f"Matsala: {e}"
