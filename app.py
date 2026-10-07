@@ -6,23 +6,25 @@ GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 
 def get_ai_answer(q):
     if not GROQ_API_KEY:
-        return "Saka GROQ_API_KEY a Render > Environment"
+        return "⚠️ Ba a saka GROQ_API_KEY ba a Render > Environment"
     try:
         url = "https://api.groq.com/openai/v1/chat/completions"
         headers = {"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"}
         data = {
             "model": "llama-3.1-8b-instant",
             "messages": [
-                {"role": "system", "content": "Kai ne MuhammadBot, mataimaki mai hankali. Kana magana da Hausa, English, Larabci, French. Kana taimakon mutane da ilimi."},
+                {"role": "system", "content": "Kai ne MuhammadBot, mataimaki mai hankali. Kana magana da Hausa da English."},
                 {"role": "user", "content": q}
             ]
         }
         r = requests.post(url, headers=headers, json=data, timeout=30)
         j = r.json()
+        # Idan error ne, nuna shi
+        if "choices" not in j:
+            return f"Groq Error: {j}"
         return j["choices"][0]["message"]["content"]
     except Exception as e:
         return f"Matsala: {e}"
-
 HTML = """
 <!DOCTYPE html>
 <html><head><meta name=viewport content="width=device-width,initial-scale=1">
